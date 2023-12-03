@@ -7,11 +7,13 @@
     <link href="styles.css" rel="stylesheet">
 </head>
 <body>
-    
-    <div class="input-field">
-        <form id="input-form" action="">
-            <h1>Digital Library</h1>
-            <fieldset>
+    <div class="header">
+        <h1 class="page-name">biblioTEKA</h1>
+        <h2 class="page-subtitle">your online library</h2>
+    </div>
+    <dialog id="add_Book">
+        <form id="input-form">
+            <fieldset id="field">
                 <legend>Enter the book info:</legend>
                 <div>
                     <label for="book_title">Enter the name of the book: </label>
@@ -29,13 +31,22 @@
                     <label for="book_read">Did you read the book? </label>
                     <input type="checkbox" id="book_read" name="book_read">
                 </div>
-                <button id="btn" type="submit">Add to the library</button>
-                
-
+                <div>
+                    <button id="btn" type="submit">Add to the library</button>
+                    <button id ="cancel" type="button" formmethod="dialog" formnovalidate>Cancel</button>
+                </div> 
             </fieldset>
         </form>
-        <button id="btn-library" type="button">Open the library</button>
-    </div>
+      
+    </dialog>
+    <p>
+        <button id="show_dialog">Add a book</button>
+    </p>
+    <output></output>
+    
+
+    <h1>The list of books</h1>
+    <div id="book-container"></div>
 
     <script src="script.js"></script>
 </body>
