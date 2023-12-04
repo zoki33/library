@@ -1,4 +1,14 @@
-let myLibrary = [];
+let myLibrary = [
+  { name: "Hobbit", author: "Tolkien", pages: "310", read: true },
+  {
+    name: "Harry Potter and the Philosophers Stone",
+    author: "J.K.Rowling",
+    pages: "223",
+    read: true,
+  },
+];
+
+showBooks();
 
 function Book(name, author, pages, read) {
   this.name = name;
@@ -34,9 +44,16 @@ function bookBoxCreate(book) {
   let book_box = document.createElement("div");
   book_box.classList.add("book_box");
   let info_name = document.createElement("p");
+  info_name.setAttribute("id", "title");
   let info_author = document.createElement("p");
   let info_pages = document.createElement("p");
   let read_label = document.createElement("label");
+  let delete_btn = document.createElement("button");
+  let break_line = document.createElement("br");
+  delete_btn.setAttribute("id", "del_btn");
+  delete_btn.setAttribute("type", "button");
+  delete_btn.innerText = "Delete";
+
   read_label.setAttribute("for", "checky");
   read_label.innerText = "Read/Not Read: ";
   let info_read = document.createElement("INPUT");
@@ -44,15 +61,22 @@ function bookBoxCreate(book) {
   info_read.setAttribute("type", "checkbox");
   info_read.checked = book.read;
   info_read.setAttribute("value", book.read.toString());
-  info_name.innerHTML = `Book name: ${book.name}`;
-  info_author.innerHTML = `Author's name: ${book.author}`;
+  info_name.innerHTML = `Name: ${book.name}`;
+  info_author.innerHTML = `Author: ${book.author}`;
   info_pages.innerHTML = `No. of pages: ${book.pages}`;
+  read_label.appendChild(info_read);
+  book_box.setAttribute("id", `${book.name}`);
+
+  delete_btn.addEventListener("click", () => {
+    deleteBook(book_box);
+  });
 
   book_box.appendChild(info_name);
   book_box.appendChild(info_author);
   book_box.appendChild(info_pages);
   book_box.appendChild(read_label);
-  book_box.appendChild(info_read);
+  book_box.appendChild(delete_btn);
+  book_box.insertBefore(break_line, delete_btn);
 
   return book_box;
 }
@@ -68,3 +92,12 @@ show_dialog.addEventListener("click", () => {
 cancel_btn.addEventListener("click", () => {
   dialog.close();
 });
+
+function deleteBook(books) {
+  myLibrary.forEach((book) => {
+    let index = myLibrary.indexOf(book);
+    if (book.name === books.id) {
+      myLibrary.splice(index, 1) && books.remove();
+    }
+  });
+}
