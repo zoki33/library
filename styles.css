@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond&display=swap');
+
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -42,10 +44,15 @@ table {
 	border-spacing: 0;
 }
 
+
+
+
+
 body{
     display: flex;
     flex-direction: column;
     align-items: center;
+    font-family: 'Cormorant Garamond', serif;
 }
 
 .header{
@@ -64,6 +71,7 @@ body{
     margin: 0.7rem;
     margin-bottom: 0;
     color: #F4F3EA;
+    font-weight: 700;
 }
 
 .page-subtitle{
@@ -78,6 +86,7 @@ body{
     justify-self: center;
     margin-bottom: 0;
     font-size: 1.5rem;
+    border-radius: 8px;
 }
 
 .added-books{
@@ -136,10 +145,15 @@ body{
     border-radius: 10px;
 }
 
+#del_btn:hover{
+    background-color: #E2495B;
+    color: #F4F3EA;
+}
+
 fieldset{
     display: flex;
     min-height: 50vh;
-    min-width: 30vw;
+    min-width: 25vw;
     flex-direction: column;
     gap: 1vh;
     font-size: clamp(2vh,3vh,5vh);
@@ -147,7 +161,7 @@ fieldset{
 }
 
 .input-field{
-    width: 90%;
+    max-width: 90%;
     height: 15%;
     margin: 1rem;
     margin-bottom: 0px;
@@ -163,7 +177,31 @@ legend{
 }
 
 .form-btns{
+    min-width: 15vh;
+    min-height: 5vh;
     margin-bottom: 1rem;
+    display: flex;
+    justify-content: center;
+    gap: 2vh;
+    margin-top: 2vh ;
+
+}
+
+.form-btns > button{
+    background-color: #333D51;
+    color: #D3AC2B;
+    font-size: 1.2rem;
+    border-radius: 10px;
+}
+
+#cancel:hover{
+    background-color: #E2495B;
+    color: #F4F3EA;
+}
+
+#btn:hover{
+    color: #333D51;
+    background-color: #d3ac2ba2;
 }
 
 .text-field{
@@ -182,6 +220,48 @@ legend{
     width: 10vw;
 }
 
-input[type=checkbox] {
-    transform: scale(1.5);
+.input-field > input[type=checkbox] {
+    transform: scale(2,2);
+    max-width: 100%;
+}
+
+#show_dialog:hover {
+    background-color: #D3AC2B ;
+    box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+    color: #F4F3EA;
+    border-radius: 8px;
+}
+input[type="button"], input[type="submit"] {
+    font-family: inherit;
+}
+
+
+@media only screen and (max-width: 767px) {
+    body{
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+    }
+    #add_Book{
+        max-width: 80vw;
+        margin-top: 20vh;
+    }
+    .added-books{
+        margin: 5vw;
+        align-self: center;
+    }
+    #book-container{
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        width: 80vw;
+        align-items: center;
+    }
+
+    .book_box{
+        display: flex;
+        min-width: 80%;
+        height: 25vh;
+       text-align: center;
+    }
 }
