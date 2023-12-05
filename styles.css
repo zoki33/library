@@ -112,6 +112,7 @@ body{
     background-color: #d3ac2b62;
     display: flex;
     flex-direction: column;
+    text-align: center;
 
     
     
@@ -158,6 +159,7 @@ fieldset{
     gap: 1vh;
     font-size: clamp(2vh,3vh,5vh);
     align-items: center;
+   
 }
 
 .input-field{
@@ -209,6 +211,15 @@ legend{
     font-size: 1.5rem;
 }
 
+.check_btn{
+    padding: 5px 15px;
+    border-radius: 15px;
+    font-size: 1rem;
+    margin-top: 1rem;
+    max-width: 60%;
+    align-self: center;
+}
+
 #add_Book{
     border: #333D51 solid 15px;
     border-radius: 20px ;
@@ -236,6 +247,7 @@ input[type="button"], input[type="submit"] {
 }
 
 
+
 @media only screen and (max-width: 767px) {
     body{
         display: flex;
@@ -261,7 +273,7 @@ input[type="button"], input[type="submit"] {
     .book_box{
         display: flex;
         min-width: 80%;
-        height: 25vh;
+        height: 30vh;
        text-align: center;
     }
 }

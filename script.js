@@ -1,21 +1,24 @@
 let myLibrary = [
-  { name: "Hobbit", author: "Tolkien", pages: "310", read: true },
+  { name: "Hobbit", author: "Tolkien", pages: "310", read: false, id: "998" },
   {
     name: "Harry Potter and the Philosophers Stone",
     author: "J.K.Rowling",
     pages: "223",
     read: true,
+    id: "999",
   },
 ];
 
 showBooks();
 
-function Book(name, author, pages, read) {
+function Book(name, author, pages, read, id) {
   this.name = name;
   this.author = author;
   this.pages = pages;
   this.read = read;
+  this.id = id;
 }
+let id_counter = 0;
 
 const form = document.getElementById("input-form");
 form.addEventListener("submit", (e) => {
@@ -24,8 +27,10 @@ form.addEventListener("submit", (e) => {
   let author = document.getElementById("book_author").value;
   let pages = document.getElementById("book_pages").value;
   let read = document.getElementById("book_read").checked;
+  let id = id_counter.toString();
+  id_counter++;
 
-  let book = new Book(name, author, pages, read);
+  let book = new Book(name, author, pages, read, id);
   myLibrary = [...myLibrary, book];
   form.reset();
   showBooks();
@@ -47,34 +52,34 @@ function bookBoxCreate(book) {
   info_name.setAttribute("id", "title");
   let info_author = document.createElement("p");
   let info_pages = document.createElement("p");
-  let read_label = document.createElement("label");
   let delete_btn = document.createElement("button");
   let break_line = document.createElement("br");
   delete_btn.setAttribute("id", "del_btn");
   delete_btn.setAttribute("type", "button");
   delete_btn.innerText = "Delete";
-
-  read_label.setAttribute("for", "checky");
-  read_label.innerText = "Read/Not Read: ";
-  let info_read = document.createElement("INPUT");
-  info_read.setAttribute("id", "checky");
-  info_read.setAttribute("type", "checkbox");
-  info_read.checked = book.read;
-  info_read.setAttribute("value", book.read.toString());
+  let info_read = document.createElement("button");
+  info_read.classList.add("check_btn");
+  info_read.setAttribute("type", "button");
+  changeButton(book.read, info_read);
   info_name.innerHTML = `Name: ${book.name}`;
   info_author.innerHTML = `Author: ${book.author}`;
   info_pages.innerHTML = `No. of pages: ${book.pages}`;
-  read_label.appendChild(info_read);
-  book_box.setAttribute("id", `${book.name}`);
+  book_box.setAttribute("id", `${book.id}`);
 
   delete_btn.addEventListener("click", () => {
     deleteBook(book_box);
   });
 
+  info_read.addEventListener("click", () => {
+    changeReadStatus(book, myLibrary);
+    changeButton(book.read, info_read);
+    showBooks();
+  });
+
   book_box.appendChild(info_name);
   book_box.appendChild(info_author);
   book_box.appendChild(info_pages);
-  book_box.appendChild(read_label);
+  book_box.appendChild(info_read);
   book_box.appendChild(delete_btn);
   book_box.insertBefore(break_line, delete_btn);
 
@@ -96,8 +101,28 @@ cancel_btn.addEventListener("click", () => {
 function deleteBook(books) {
   myLibrary.forEach((book) => {
     let index = myLibrary.indexOf(book);
-    if (book.name === books.id) {
+    if (book.id === books.id) {
       myLibrary.splice(index, 1) && books.remove();
     }
   });
+}
+
+function changeReadStatus(books, myLibrary) {
+  myLibrary.forEach((book) => {
+    if (book.id === books.id) {
+      book.read = !book.read;
+    }
+  });
+}
+
+function changeButton(status, button) {
+  status
+    ? ((button.style.backgroundColor = "#4FFFB0"),
+      (button.style.color = "#333D51"),
+      (button.innerText = "READ"))
+    : ((button.style.backgroundColor = "#E2495B"),
+      (button.style.color = "#F4F3EA"),
+      (button.innerText = "NOT READ"));
+
+  return button;
 }
